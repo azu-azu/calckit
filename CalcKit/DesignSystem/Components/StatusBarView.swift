@@ -1,6 +1,12 @@
 import SwiftUI
 
 struct StatusBarView: View {
+    private enum Layout {
+        static let horizontalPadding: CGFloat = 36
+        static let topPaddingOffset: CGFloat = 18
+        static let topPaddingFallback: CGFloat = 24
+    }
+
     let safeAreaTop: CGFloat
 
     @State private var now = Date()
@@ -30,8 +36,8 @@ struct StatusBarView: View {
                 .dynamicFont(size: 13, weight: .regular, design: .monospaced)
                 .foregroundColor(DesignTokens.CommonTextColors.quaternary)
         }
-        .padding(.horizontal, 36)
-        .padding(.top, safeAreaTop > 0 ? safeAreaTop + 18 : 24)
+        .padding(.horizontal, Layout.horizontalPadding)
+        .padding(.top, safeAreaTop > 0 ? safeAreaTop + Layout.topPaddingOffset : Layout.topPaddingFallback)
         .onReceive(timer) { now = $0 }
     }
 }

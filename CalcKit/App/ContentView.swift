@@ -84,6 +84,7 @@ struct ContentView: View {
                 StatusBarView(safeAreaTop: geo.safeAreaInsets.top)
             }
             .ignoresSafeArea()
+            .allowsHitTesting(false)
         }
         .gesture(sideMenuDragGesture())
         .statusBarHidden(true)
