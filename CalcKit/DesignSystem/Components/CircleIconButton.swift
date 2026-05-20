@@ -1,13 +1,11 @@
 import SwiftUI
-import UIKit
-
 struct CircleIconButton: View {
     let systemName: String
     let action: () -> Void
 
     var body: some View {
         Button {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            HapticFeedback.impact(.light)
             action()
         } label: {
             Image(systemName: systemName)

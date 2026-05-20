@@ -180,7 +180,7 @@ struct GoalCalcView: View {
                                     (isPlus ? DesignTokens.StatusColors.success : DesignTokens.StatusColors.danger)
                                         .opacity(0.15)
                                 )
-                                .cornerRadius(10)
+                                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
                         }
                         .buttonStyle(.plain)
 
@@ -287,7 +287,7 @@ struct GoalCalcView: View {
         }
         .keyboardCloseToolbar { isFocused = false }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 isFocused = true
             }
         }
@@ -307,7 +307,7 @@ struct GoalCalcView: View {
                     .frame(width: 50)
                     .padding(.vertical, 8)
                     .background(DesignTokens.InputColors.fieldBackground)
-                    .cornerRadius(8)
+                    .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
 
                 Picker("", selection: $selectedPeriod) {
                     ForEach(Period.allCases) { period in

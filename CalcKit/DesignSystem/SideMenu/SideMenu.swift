@@ -1,6 +1,4 @@
 import SwiftUI
-import UIKit
-
 struct SideMenu: View {
     @Binding var isPresented: Bool
     @Binding var selectedPage: Page
@@ -88,7 +86,7 @@ struct SideMenu: View {
                     .frame(maxHeight: .infinity, alignment: .top)
                     .overlay(alignment: .bottomLeading) {
                         Button {
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            HapticFeedback.impact(.light)
                             close()
                         } label: {
                             Image(systemName: "xmark")
@@ -122,7 +120,7 @@ struct SideMenu: View {
 
     private func menuItem(page: Page) -> some View {
         Button {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            HapticFeedback.impact(.light)
             selectedPage = page
             close()
         } label: {

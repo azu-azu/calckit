@@ -25,6 +25,7 @@ struct DesignTokens {
     enum CalcColors {
         static let displayText = CommonTextColors.primary
         static let expressionText = CommonTextColors.tertiary
+        static let keypadBackground = Color(hex: "#424242")
     }
 
     // MARK: - Calculator Typography
@@ -59,6 +60,8 @@ struct DesignTokens {
 
     enum InputLayout {
         static let fieldCornerRadius: CGFloat = 12
+        static let compactFieldCornerRadius: CGFloat = 8
+        static let cardCornerRadius: CGFloat = 10
         static let fieldPadding: CGFloat = 16
         static let sectionSpacing: CGFloat = 24
         static let itemSpacing: CGFloat = 16
@@ -117,5 +120,14 @@ struct DesignTokens {
         static let danger = Color(hex: "#FF5C5C")
         static let warning = Color(hex: "#FFC069")
         static let success = Color(hex: "#4ADE80")
+    }
+
+    // MARK: - Timing
+
+    enum Timing {
+        /// iOS keyboard appearance wait
+        static let keyboardFocusDelay: TimeInterval = 0.3
+        /// UI update wait after inserting a new row
+        static let rowInsertFocusDelay: TimeInterval = 0.1
     }
 }

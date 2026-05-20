@@ -1,6 +1,4 @@
 import SwiftUI
-import UIKit
-
 struct CalcKeypad: View {
     let onDigit: (String) -> Void
     let onOperator: (CalcEngine.Operator) -> Void
@@ -74,7 +72,7 @@ struct CalcKeypad: View {
 
     private func iconButton(_ systemName: String, style: CalcButtonStyle, action: @escaping () -> Void) -> some View {
         Button {
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            HapticFeedback.impact(.rigid)
             action()
         } label: {
             Image(systemName: systemName)
@@ -91,7 +89,7 @@ struct CalcKeypad: View {
 
     private func wideButton(_ label: String, width: CGFloat, style: CalcButtonStyle, action: @escaping () -> Void) -> some View {
         Button {
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            HapticFeedback.impact(.rigid)
             action()
         } label: {
             Text(label)

@@ -43,7 +43,7 @@ struct HomeCalculatorView: View {
                     .frame(height: DesignTokens.CalcLayout.buttonHeight * 6
                         + DesignTokens.CalcLayout.buttonSpacing * 5)
                     .padding(.vertical, 12)
-                    .background(Color(hex: "#424242"))
+                    .background(DesignTokens.CalcColors.keypadBackground)
             }
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
@@ -113,7 +113,7 @@ struct HomeCalculatorView: View {
                 .padding(.horizontal, 16)
                 .frame(height: DesignTokens.CalcLayout.toolbarHeight)
                 .background(AppTheme.accent.opacity(0.12))
-                .cornerRadius(10)
+                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
             }
             .buttonStyle(.plain)
         }

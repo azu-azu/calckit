@@ -45,7 +45,7 @@ struct MathToolsView: View {
                             .foregroundColor(DesignTokens.CommonTextColors.primary)
                             .padding(12)
                             .background(DesignTokens.InputColors.fieldBackground)
-                            .cornerRadius(8)
+                            .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
                     }
 
                     if !sqrtResult.isEmpty {
@@ -72,7 +72,7 @@ struct MathToolsView: View {
         }
         .keyboardCloseToolbar { isFocused = false }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 isFocused = true
             }
         }

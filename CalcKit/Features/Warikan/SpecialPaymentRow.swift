@@ -21,7 +21,7 @@ struct SpecialPaymentRow<F: Hashable>: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                     .background(DesignTokens.InputColors.fieldBackground)
-                    .cornerRadius(8)
+                    .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
             }
 
             // Count
@@ -56,6 +56,6 @@ struct SpecialPaymentRow<F: Hashable>: View {
         }
         .padding(12)
         .background(DesignTokens.CommonBackgroundColors.cardSubtle)
-        .cornerRadius(10)
+        .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
     }
 }

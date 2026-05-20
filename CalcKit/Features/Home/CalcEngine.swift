@@ -124,7 +124,7 @@ struct CalcEngine {
         updateExpression()
 
         // 中間結果を表示（末尾の operator を除いて evaluate）
-        let tokensWithoutTrailingOp = tokens.filter { _ in true }.dropLast()
+        let tokensWithoutTrailingOp = tokens.dropLast()
         if let result = evaluateTokens(Array(tokensWithoutTrailingOp)) {
             displayValue = formatNumber(result)
         }

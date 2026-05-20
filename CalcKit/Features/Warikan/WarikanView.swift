@@ -126,7 +126,7 @@ struct WarikanView: View {
                     Button {
                         specialPayments.append(SpecialPayment())
                         let newIndex = specialPayments.count - 1
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.rowInsertFocusDelay) {
                             focusedField = .specialPayment(newIndex)
                         }
                     } label: {
@@ -139,7 +139,7 @@ struct WarikanView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 44)
                         .background(AppTheme.accent.opacity(0.1))
-                        .cornerRadius(10)
+                        .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
                     }
                     .buttonStyle(.plain)
                 }
@@ -156,7 +156,7 @@ struct WarikanView: View {
         }
         .keyboardCloseToolbar { focusedField = nil }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 focusedField = .totalAmount
             }
         }
@@ -267,7 +267,7 @@ struct WarikanView: View {
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
                         .background(DesignTokens.InputColors.fieldBackground)
-                        .cornerRadius(8)
+                        .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
 
                     Text("× \(result.remainingPeople)人")
                         .dynamicFont(size: 16, weight: .medium)
