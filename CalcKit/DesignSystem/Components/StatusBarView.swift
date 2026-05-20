@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct StatusBarView: View {
+    let safeAreaTop: CGFloat
+
     @State private var now = Date()
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -28,6 +30,8 @@ struct StatusBarView: View {
                 .dynamicFont(size: 13, weight: .regular, design: .monospaced)
                 .foregroundColor(DesignTokens.CommonTextColors.quaternary)
         }
+        .padding(.horizontal, 36)
+        .padding(.top, safeAreaTop > 0 ? safeAreaTop + 18 : 24)
         .onReceive(timer) { now = $0 }
     }
 }

@@ -21,7 +21,7 @@ struct HistoryView: View {
                 Spacer()
                 VStack(spacing: 12) {
                     Image(systemName: "clock.arrow.circlepath")
-                        .font(.system(size: 48))
+                        .font(.system(size: 48, design: .rounded))
                         .foregroundColor(DesignTokens.CommonTextColors.quinary)
                     Text("保存された計算はありません")
                         .dynamicFont(size: 16, weight: .regular)

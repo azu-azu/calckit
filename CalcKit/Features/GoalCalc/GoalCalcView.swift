@@ -184,7 +184,7 @@ struct GoalCalcView: View {
                         }
                         .buttonStyle(.plain)
 
-                        TextField("目標数値", text: $targetText)
+                        TextField("数値を入力", text: $targetText)
                             .keyboardType(.decimalPad)
                             .focused($isFocused)
                             .dynamicFont(size: 24, weight: .semibold)
@@ -196,26 +196,26 @@ struct GoalCalcView: View {
 
                     // People count
                     HStack {
-                        Text("人数")
-                            .dynamicFont(size: 14, weight: .medium)
-                            .foregroundColor(DesignTokens.CommonTextColors.secondary)
                         Spacer()
                         Button {
                             if peopleCount > 1 { peopleCount -= 1 }
                         } label: {
                             Image(systemName: "minus.circle.fill")
-                                .font(.system(size: 24))
+                                .font(.system(size: 24, design: .rounded))
                                 .foregroundColor(DesignTokens.CommonTextColors.tertiary)
                         }
                         Text("\(peopleCount)")
                             .dynamicFont(size: 20, weight: .semibold, design: .monospaced)
                             .foregroundColor(DesignTokens.CommonTextColors.primary)
                             .frame(width: 40)
+                        Text("人で")
+                            .dynamicFont(size: 16, weight: .regular)
+                            .foregroundColor(DesignTokens.CommonTextColors.secondary)
                         Button {
                             peopleCount += 1
                         } label: {
                             Image(systemName: "plus.circle.fill")
-                                .font(.system(size: 24))
+                                .font(.system(size: 24, design: .rounded))
                                 .foregroundColor(AppTheme.accent)
                         }
                     }
@@ -285,17 +285,7 @@ struct GoalCalcView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button {
-                    isFocused = false
-                } label: {
-                    Image(systemName: "keyboard.chevron.compact.down")
-                }
-                .foregroundColor(AppTheme.accent)
-            }
-        }
+        .keyboardCloseToolbar { isFocused = false }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isFocused = true

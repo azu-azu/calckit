@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct CalcKeypad: View {
     let onDigit: (String) -> Void
@@ -11,8 +12,6 @@ struct CalcKeypad: View {
     let onOpenParen: () -> Void
     let onCloseParen: () -> Void
     let onToggleSign: () -> Void
-    let onSave: () -> Void
-    let onMenu: () -> Void
 
     private let spacing = DesignTokens.CalcLayout.buttonSpacing
 
@@ -68,55 +67,33 @@ struct CalcKeypad: View {
                     wideButton("=", width: buttonWidth * 2 + spacing, style: .equals) { onEquals() }
                 }
 
-                // Toolbar: ☰ (左) ... Save (右)
-                HStack {
-                    Button(action: onMenu) {
-                        Image(systemName: "line.3.horizontal")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(DesignTokens.CommonTextColors.secondary)
-                            .frame(width: 48, height: DesignTokens.CalcLayout.toolbarHeight)
-                            .background(DesignTokens.CalcColors.functionButton)
-                            .cornerRadius(10)
-                    }
-                    .buttonStyle(.plain)
-
-                    Spacer()
-
-                    Button(action: onSave) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "square.and.arrow.down")
-                                .font(.system(size: 14))
-                            Text("Save")
-                                .dynamicFont(size: 14, weight: .medium)
-                        }
-                        .foregroundColor(AppTheme.accent)
-                        .padding(.horizontal, 16)
-                        .frame(height: DesignTokens.CalcLayout.toolbarHeight)
-                        .background(AppTheme.accent.opacity(0.12))
-                        .cornerRadius(10)
-                    }
-                    .buttonStyle(.plain)
-                }
-                .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal, 12)
         }
     }
 
     private func iconButton(_ systemName: String, style: CalcButtonStyle, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            action()
+        } label: {
             Image(systemName: systemName)
-                .font(.system(size: DesignTokens.CalcTypography.buttonSize - 4, weight: .medium))
+                .font(.system(size: DesignTokens.CalcTypography.buttonSize - 4, weight: .medium, design: .rounded))
                 .foregroundColor(style.foregroundColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(style.backgroundColor)
-                .cornerRadius(DesignTokens.CalcLayout.buttonCornerRadius)
+                .modifier(RaisedButtonStyle(
+                    style: style,
+                    cornerRadius: DesignTokens.CalcLayout.buttonCornerRadius
+                ))
         }
         .buttonStyle(.plain)
     }
 
     private func wideButton(_ label: String, width: CGFloat, style: CalcButtonStyle, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            action()
+        } label: {
             Text(label)
                 .dynamicFont(
                     size: DesignTokens.CalcTypography.buttonSize,
@@ -125,8 +102,10 @@ struct CalcKeypad: View {
                 .foregroundColor(style.foregroundColor)
                 .frame(maxHeight: .infinity)
                 .frame(width: width)
-                .background(style.backgroundColor)
-                .cornerRadius(DesignTokens.CalcLayout.buttonCornerRadius)
+                .modifier(RaisedButtonStyle(
+                    style: style,
+                    cornerRadius: DesignTokens.CalcLayout.buttonCornerRadius
+                ))
         }
         .buttonStyle(.plain)
     }

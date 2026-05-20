@@ -56,14 +56,14 @@ struct CalcEngine {
 
         var display: String {
             switch self {
-            case .number(let v): formatStatic(v)
+            case .number(let v): Self.formatDecimal(v)
             case .op(let o): o.symbol
             case .openParen: "("
             case .closeParen: ")"
             }
         }
 
-        private func formatStatic(_ value: Decimal) -> String {
+        static func formatDecimal(_ value: Decimal) -> String {
             let nsDecimal = value as NSDecimalNumber
             let doubleValue = nsDecimal.doubleValue
             if doubleValue == doubleValue.rounded() && abs(doubleValue) < 1e15 {
@@ -490,18 +490,6 @@ struct CalcEngine {
     // MARK: - Formatting
 
     private func formatNumber(_ value: Decimal) -> String {
-        let nsDecimal = value as NSDecimalNumber
-        let doubleValue = nsDecimal.doubleValue
-
-        if doubleValue == doubleValue.rounded() && abs(doubleValue) < 1e15 {
-            return String(format: "%.0f", doubleValue)
-        }
-
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 10
-        formatter.numberStyle = .decimal
-        formatter.usesGroupingSeparator = false
-        return formatter.string(from: nsDecimal) ?? "\(value)"
+        Token.formatDecimal(value)
     }
 }

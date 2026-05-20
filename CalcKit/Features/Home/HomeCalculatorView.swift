@@ -28,18 +28,34 @@ struct HomeCalculatorView: View {
 
     private var portraitLayout: some View {
         VStack(spacing: 0) {
-            Spacer()
+            VStack(spacing: 0) {
+                VStack {
+                    Spacer()
+                    CalcDisplay(
+                        expression: engine.expression,
+                        intermediateSteps: engine.intermediateSteps,
+                        displayValue: engine.displayValue
+                    )
+                }
+                .background(Color.black.opacity(0.3))
 
-            CalcDisplay(
-                expression: engine.expression,
-                intermediateSteps: engine.intermediateSteps,
-                displayValue: engine.displayValue
+                keypad
+                    .frame(height: DesignTokens.CalcLayout.buttonHeight * 6
+                        + DesignTokens.CalcLayout.buttonSpacing * 5)
+                    .padding(.vertical, 12)
+                    .background(Color(hex: "#424242"))
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .strokeBorder(Color.white.opacity(0.35), lineWidth: 1)
             )
+            .padding(.top, 36)
+            .padding(.horizontal, 4)
 
-            keypad
-                .frame(height: DesignTokens.CalcLayout.buttonHeight * 6
-                    + DesignTokens.CalcLayout.toolbarHeight
-                    + DesignTokens.CalcLayout.buttonSpacing * 6)
+            calcToolbar
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
                 .padding(.bottom, 8)
         }
     }
@@ -76,9 +92,30 @@ struct HomeCalculatorView: View {
             onPercent: { engine.inputPercent() },
             onOpenParen: { engine.inputOpenParen() },
             onCloseParen: { engine.inputCloseParen() },
-            onToggleSign: { engine.toggleSign() },
-            onSave: { showSaveDialog = true },
-            onMenu: onMenu
+            onToggleSign: { engine.toggleSign() }
         )
+    }
+
+    private var calcToolbar: some View {
+        HStack {
+            SideMenuTriggerButton { onMenu() }
+
+            Spacer()
+
+            Button(action: { showSaveDialog = true }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "square.and.arrow.down")
+                        .font(.system(size: 14, design: .rounded))
+                    Text("Save")
+                        .dynamicFont(size: 14, weight: .medium)
+                }
+                .foregroundColor(AppTheme.accent)
+                .padding(.horizontal, 16)
+                .frame(height: DesignTokens.CalcLayout.toolbarHeight)
+                .background(AppTheme.accent.opacity(0.12))
+                .cornerRadius(10)
+            }
+            .buttonStyle(.plain)
+        }
     }
 }

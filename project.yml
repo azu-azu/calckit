@@ -1,6 +1,6 @@
 name: CalcKit
 options:
-  bundleIdPrefix: com.calckit
+  bundleIdPrefix: com.tsukiusagi
   deploymentTarget:
     iOS: "17.0"
   xcodeVersion: "16.0"
@@ -8,6 +8,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ZD854UM35V
     GENERATE_INFOPLIST_FILE: YES
     INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
     INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
@@ -22,9 +24,9 @@ targets:
       - CalcKit
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.calckit.app
-        MARKETING_VERSION: "1.0.0"
-        CURRENT_PROJECT_VERSION: "1"
+        PRODUCT_BUNDLE_IDENTIFIER: com.tsukiusagi.calckit
+        MARKETING_VERSION: "1.1.0"
+        CURRENT_PROJECT_VERSION: "2"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO

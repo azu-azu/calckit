@@ -25,7 +25,6 @@ iOS 電卓アプリ。基本的な計算機能に加えて、ワリカン・日�
 
 ### 数学
 - ルート計算
-- よく使う数式・法則の一覧（ピタゴラス、二次方程式の解の公式、円の面積など）
 
 ### History
 - 保存した計算結果の一覧表示
@@ -72,3 +71,9 @@ CalcKit/
 ```sh
 xcodegen generate
 ```
+
+---
+
+### ✨ App Store
+- v1.1.0 2026/05/05 - Raised keys スタイル、haptic feedback、shared components 追加、UI 統一
+- v1.0.0 2026/04/27

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct SideMenu: View {
     @Binding var isPresented: Bool
@@ -67,7 +68,7 @@ struct SideMenu: View {
                                     .padding(.top, DesignTokens.SideMenuLayout.itemSpacing)
 
                                 // Footer
-                                Text("v1.0.0")
+                                Text("v1.1.0")
                                     .dynamicFont(
                                         size: DesignTokens.SideMenuTypography.footerInfoSize,
                                         weight: DesignTokens.SideMenuTypography.footerInfoWeight
@@ -86,9 +87,12 @@ struct SideMenu: View {
                     .frame(width: baseMenuWidth)
                     .frame(maxHeight: .infinity, alignment: .top)
                     .overlay(alignment: .bottomLeading) {
-                        Button(action: close) {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            close()
+                        } label: {
                             Image(systemName: "xmark")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.system(size: 14, weight: .semibold, design: .rounded))
                                 .foregroundColor(DesignTokens.CommonTextColors.secondary)
                                 .frame(width: 44, height: 44)
                                 .background(DesignTokens.CommonBackgroundColors.cardHighlight)
@@ -118,12 +122,13 @@ struct SideMenu: View {
 
     private func menuItem(page: Page) -> some View {
         Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
             selectedPage = page
             close()
         } label: {
             HStack(spacing: 16) {
                 Image(systemName: page.icon)
-                    .font(.system(size: DesignTokens.SideMenuTypography.itemIconSize))
+                    .font(.system(size: DesignTokens.SideMenuTypography.itemIconSize, design: .rounded))
                     .foregroundColor(
                         selectedPage == page
                             ? AppTheme.accent
@@ -145,7 +150,7 @@ struct SideMenu: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: DesignTokens.SideMenuTypography.chevronSize))
+                    .font(.system(size: DesignTokens.SideMenuTypography.chevronSize, design: .rounded))
                     .foregroundColor(DesignTokens.SideMenuColors.textMuted)
             }
             .padding(.vertical, DesignTokens.SideMenuLayout.itemVerticalPadding)

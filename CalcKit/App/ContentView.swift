@@ -53,7 +53,7 @@ struct ContentView: View {
             currentPageView
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Hamburger button (左下、home以外で表示)
+            // Navigation buttons (home以外で表示)
             if selectedPage != .home {
                 VStack {
                     Spacer()
@@ -62,8 +62,11 @@ struct ContentView: View {
                             openMenu()
                         }
                         Spacer()
+                        CircleIconButton(systemName: "house.fill") {
+                            selectedPage = .home
+                        }
                     }
-                    .padding(.leading, 8)
+                    .padding(.horizontal, 8)
                     .padding(.bottom, 8)
                 }
             }
@@ -78,9 +81,7 @@ struct ContentView: View {
         }
         .overlay(alignment: .top) {
             GeometryReader { geo in
-                StatusBarView()
-                    .padding(.horizontal, 36)
-                    .padding(.top, geo.safeAreaInsets.top > 0 ? geo.safeAreaInsets.top + 4 : 12)
+                StatusBarView(safeAreaTop: geo.safeAreaInsets.top)
             }
             .ignoresSafeArea()
         }

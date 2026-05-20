@@ -28,3 +28,6 @@ Pods/
 # Xcode Playground
 timeline.xctimeline
 playground.xcworkspace
+
+tmp.md
+docs/internal/

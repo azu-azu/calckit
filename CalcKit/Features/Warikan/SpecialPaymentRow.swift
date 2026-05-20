@@ -51,7 +51,7 @@ struct SpecialPaymentRow<F: Hashable>: View {
             Button(action: onClear) {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(DesignTokens.CommonTextColors.quaternary)
-                    .font(.system(size: 20))
+                    .font(.system(size: 20, design: .rounded))
             }
         }
         .padding(12)

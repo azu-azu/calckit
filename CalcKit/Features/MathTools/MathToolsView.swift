@@ -2,7 +2,6 @@ import SwiftUI
 
 struct MathToolsView: View {
     @State private var sqrtInput = ""
-    @State private var showFormulas = false
     @FocusState private var isFocused: Bool
 
     private var sqrtResult: String {
@@ -66,42 +65,12 @@ struct MathToolsView: View {
                 }
                 .cardStyle()
 
-                // Formulas button
-                Button {
-                    showFormulas = true
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "function")
-                        Text("数式")
-                            .dynamicFont(size: 17, weight: .semibold)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(AppTheme.accent)
-                    .cornerRadius(12)
-                }
-                .buttonStyle(.plain)
-
                 Spacer(minLength: 40)
             }
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .sheet(isPresented: $showFormulas) {
-            FormulaSheetView()
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button {
-                    isFocused = false
-                } label: {
-                    Image(systemName: "keyboard.chevron.compact.down")
-                }
-                .foregroundColor(AppTheme.accent)
-            }
-        }
+        .keyboardCloseToolbar { isFocused = false }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 isFocused = true

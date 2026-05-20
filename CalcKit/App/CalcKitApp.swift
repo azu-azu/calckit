@@ -9,5 +9,5 @@ struct CalcKitApp: App {
             ContentView()
                 .environment(historyStore)
         }
-    }
+   }
 }
