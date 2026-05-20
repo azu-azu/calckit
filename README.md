@@ -71,3 +71,9 @@ CalcKit/
 ```sh
 xcodegen generate
 ```
+
+---
+
+### ✨ App Store
+- v1.1.0 2026/05/05 - Raised keys スタイル、haptic feedback、shared components 追加、UI 統一
+- v1.0.0 2026/04/27
