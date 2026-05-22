@@ -33,11 +33,15 @@ struct DayCountView: View {
         return calendar.date(byAdding: .day, value: daysOffset, to: baseDate) ?? baseDate
     }
 
+    private static let resultFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "ja_JP")
+        f.dateFormat = "yyyy年M月d日（E）"
+        return f
+    }()
+
     private var resultDateString: String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateFormat = "yyyy年M月d日（E）"
-        return formatter.string(from: resultDate)
+        Self.resultFormatter.string(from: resultDate)
     }
 
     var body: some View {
@@ -85,7 +89,7 @@ struct DayCountView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .onTapGesture { isDaysFocused = false }
+        .keyboardCloseToolbar { isDaysFocused = false }
     }
 
     private var daysBetweenInputs: some View {
@@ -115,36 +119,36 @@ struct DayCountView: View {
         .cardStyle()
     }
 
-    private var dateAfterInputs: some View {
-        VStack(spacing: DesignTokens.InputLayout.itemSpacing) {
-            HStack {
-                Text("スタート日")
-                    .dynamicFont(size: 14, weight: .medium)
-                    .foregroundColor(DesignTokens.CommonTextColors.secondary)
-                Spacer()
-                DatePicker("", selection: $baseDate, displayedComponents: .date)
-                    .labelsHidden()
-                    .tint(AppTheme.accent)
-            }
+    @ViewBuilder private var dateAfterInputs: some View {
+        HStack {
+            Text("スタート日")
+                .dynamicFont(size: 14, weight: .medium)
+                .foregroundColor(DesignTokens.CommonTextColors.secondary)
+            Spacer()
+            DatePicker("", selection: $baseDate, displayedComponents: .date)
+                .labelsHidden()
+                .tint(AppTheme.accent)
+        }
+        .cardStyle()
 
-            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-
+        VStack(alignment: .leading, spacing: 6) {
+            Text("日数")
+                .dynamicFont(size: 14, weight: .medium)
+                .foregroundColor(DesignTokens.CommonTextColors.secondary)
             HStack {
-                Text("日数")
-                    .dynamicFont(size: 14, weight: .medium)
-                    .foregroundColor(DesignTokens.CommonTextColors.secondary)
-                Spacer()
                 TextField("0", text: $daysText)
-                    .dynamicFont(size: 16, weight: .regular)
-                    .foregroundColor(DesignTokens.CommonTextColors.primary)
                     .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
                     .focused($isDaysFocused)
-                    .frame(width: 80)
+                    .dynamicFont(size: 20, weight: .semibold)
+                    .foregroundColor(DesignTokens.CommonTextColors.primary)
+                Spacer()
                 Text("日後")
                     .dynamicFont(size: 14, weight: .regular)
                     .foregroundColor(DesignTokens.CommonTextColors.tertiary)
             }
+            .padding(DesignTokens.InputLayout.fieldPadding)
+            .background(DesignTokens.InputColors.fieldBackground)
+            .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
         }
         .cardStyle()
     }
@@ -170,7 +174,7 @@ struct DayCountView: View {
         VStack(spacing: 8) {
             Text(resultDateString)
                 .dynamicFont(
-                    size: DesignTokens.FeatureTypography.resultSize * 0.6,
+                    size: DesignTokens.FeatureTypography.dateResultSize,
                     weight: DesignTokens.FeatureTypography.resultWeight,
                     design: .monospaced
                 )

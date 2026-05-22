@@ -112,6 +112,7 @@ struct DesignTokens {
         static let sectionTitleWeight: Font.Weight = .semibold
         static let resultSize: CGFloat = 32
         static let resultWeight: Font.Weight = .semibold
+        static let dateResultSize: CGFloat = 20
     }
 
     // MARK: - Status Colors
