@@ -53,24 +53,6 @@ struct ContentView: View {
             currentPageView
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Navigation buttons (home以外で表示)
-            if selectedPage != .home {
-                VStack {
-                    Spacer()
-                    HStack {
-                        SideMenuTriggerButton {
-                            openMenu()
-                        }
-                        Spacer()
-                        CircleIconButton(systemName: "house.fill") {
-                            selectedPage = .home
-                        }
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 8)
-                }
-            }
-
             // Overlay + Menu
             SideMenuOverlay(isPresented: $isMenuPresented)
 
@@ -78,6 +60,26 @@ struct ContentView: View {
                 isPresented: $isMenuPresented,
                 selectedPage: $selectedPage
             )
+
+            // Navigation buttons — SideMenuより後（上）に置くことでhit test優先度を確保
+            if !isMenuPresented {
+                VStack {
+                    Spacer()
+                    HStack {
+                        SideMenuTriggerButton {
+                            openMenu()
+                        }
+                        Spacer()
+                        if selectedPage != .home {
+                            CircleIconButton(systemName: "house.fill") {
+                                selectedPage = .home
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
+                }
+            }
         }
         .overlay(alignment: .top) {
             GeometryReader { geo in
@@ -120,7 +122,7 @@ struct ContentView: View {
     private var currentPageView: some View {
         switch selectedPage {
         case .home:
-            HomeCalculatorView(onMenu: openMenu)
+            HomeCalculatorView()
         case .warikan:
             WarikanView()
         case .dayCount:

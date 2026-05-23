@@ -4,7 +4,6 @@ struct HomeCalculatorView: View {
     @Environment(HistoryStore.self) private var historyStore
     @State private var engine = CalcEngine()
     @State private var showSaveDialog = false
-    var onMenu: () -> Void = {}
 
     var body: some View {
         GeometryReader { geo in
@@ -98,8 +97,6 @@ struct HomeCalculatorView: View {
 
     private var calcToolbar: some View {
         HStack {
-            SideMenuTriggerButton { onMenu() }
-
             Spacer()
 
             Button(action: { showSaveDialog = true }) {
