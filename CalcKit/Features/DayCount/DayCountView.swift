@@ -90,6 +90,12 @@ struct DayCountView: View {
             .padding(.top, 16)
         }
         .keyboardCloseToolbar { isDaysFocused = false }
+        .onChange(of: mode) { _, newMode in
+            guard newMode == .dateAfter else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
+                isDaysFocused = true
+            }
+        }
     }
 
     private var daysBetweenInputs: some View {
