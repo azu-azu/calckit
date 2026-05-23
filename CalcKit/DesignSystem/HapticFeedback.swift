@@ -13,7 +13,9 @@ enum HapticFeedback {
             rigidGenerator.impactOccurred()
             DispatchQueue.main.async { rigidGenerator.prepare() }
         default:
-            UIImpactFeedbackGenerator(style: style).impactOccurred()
+            let gen = UIImpactFeedbackGenerator(style: style)
+            gen.prepare()
+            gen.impactOccurred()
         }
     }
 
