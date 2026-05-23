@@ -154,34 +154,29 @@ struct DayCountView: View {
     }
 
     private var daysBetweenResult: some View {
-        VStack(spacing: 8) {
-            Text("\(dayCount)")
-                .dynamicFont(
-                    size: DesignTokens.FeatureTypography.resultSize,
-                    weight: DesignTokens.FeatureTypography.resultWeight,
-                    design: .monospaced
-                )
-                .foregroundColor(AppTheme.accent)
-            Text(businessDaysOnly ? "平日" : "日間")
-                .dynamicFont(size: 16, weight: .regular)
-                .foregroundColor(DesignTokens.CommonTextColors.tertiary)
-        }
-        .frame(maxWidth: .infinity)
-        .cardStyle()
+        resultCard(
+            value: "\(dayCount)",
+            size: DesignTokens.FeatureTypography.resultSize,
+            subtitle: businessDaysOnly ? "平日" : "日間"
+        )
     }
 
     private var dateAfterResult: some View {
+        resultCard(
+            value: resultDateString,
+            size: DesignTokens.FeatureTypography.dateResultSize,
+            subtitle: businessDaysOnly ? "\(daysOffset)平日後" : "\(daysOffset)日後"
+        )
+    }
+
+    private func resultCard(value: String, size: CGFloat, subtitle: String) -> some View {
         VStack(spacing: 8) {
-            Text(resultDateString)
-                .dynamicFont(
-                    size: DesignTokens.FeatureTypography.dateResultSize,
-                    weight: DesignTokens.FeatureTypography.resultWeight,
-                    design: .monospaced
-                )
+            Text(value)
+                .dynamicFont(size: size, weight: DesignTokens.FeatureTypography.resultWeight, design: .monospaced)
                 .foregroundColor(AppTheme.accent)
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
-            Text(businessDaysOnly ? "\(daysOffset)平日後" : "\(daysOffset)日後")
+            Text(subtitle)
                 .dynamicFont(size: 16, weight: .regular)
                 .foregroundColor(DesignTokens.CommonTextColors.tertiary)
         }

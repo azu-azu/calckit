@@ -131,6 +131,10 @@ struct GoalCalcView: View {
         }
     }
 
+    private var statusColor: Color {
+        isPlus ? DesignTokens.StatusColors.success : DesignTokens.StatusColors.danger
+    }
+
     private var dailyRate: Double {
         guard totalDays > 0, peopleCount > 0 else { return 0 }
         let rate = targetValue / totalDays / Double(peopleCount)
@@ -174,12 +178,9 @@ struct GoalCalcView: View {
                         } label: {
                             Text(isPlus ? "+" : "−")
                                 .dynamicFont(size: 22, weight: .bold)
-                                .foregroundColor(isPlus ? DesignTokens.StatusColors.success : DesignTokens.StatusColors.danger)
+                                .foregroundColor(statusColor)
                                 .frame(width: 44, height: 44)
-                                .background(
-                                    (isPlus ? DesignTokens.StatusColors.success : DesignTokens.StatusColors.danger)
-                                        .opacity(0.15)
-                                )
+                                .background(statusColor.opacity(0.15))
                                 .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
                         }
                         .buttonStyle(.plain)

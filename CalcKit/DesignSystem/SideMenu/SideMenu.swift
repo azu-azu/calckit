@@ -12,6 +12,7 @@ struct SideMenu: View {
                 size.width * DesignTokens.SideMenuLayout.menuWidthRatio,
                 DesignTokens.SideMenuLayout.menuMaxWidth
             )
+            // safe.leading はノッチ/DI がある側で非ゼロになる。それ以外は minLeadingOffset を下限として保証
             let leadingOffset = max(
                 safe.leading,
                 DesignTokens.SideMenuLayout.minLeadingOffset

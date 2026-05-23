@@ -26,6 +26,7 @@ struct DesignTokens {
         static let displayText = CommonTextColors.primary
         static let expressionText = CommonTextColors.tertiary
         static let keypadBackground = Color(hex: "#424242")
+        static let buttonShadow = Color.black.opacity(0.6)
     }
 
     // MARK: - Calculator Typography

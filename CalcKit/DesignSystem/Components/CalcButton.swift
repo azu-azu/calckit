@@ -43,7 +43,7 @@ struct RaisedButtonStyle: ViewModifier {
             .padding(EdgeInsets(top: 2, leading: 2, bottom: 4, trailing: 2))
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius + 2)
-                    .fill(Color.black.opacity(0.6))
+                    .fill(DesignTokens.CalcColors.buttonShadow)
             )
     }
 }
