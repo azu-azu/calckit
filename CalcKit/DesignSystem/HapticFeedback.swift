@@ -1,13 +1,25 @@
 import UIKit
 
 enum HapticFeedback {
+    private static let lightGenerator = UIImpactFeedbackGenerator(style: .light)
+    private static let rigidGenerator = UIImpactFeedbackGenerator(style: .rigid)
+
     static func impact(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
-        UIImpactFeedbackGenerator(style: style).impactOccurred()
+        switch style {
+        case .light:
+            lightGenerator.impactOccurred()
+            DispatchQueue.main.async { lightGenerator.prepare() }
+        case .rigid:
+            rigidGenerator.impactOccurred()
+            DispatchQueue.main.async { rigidGenerator.prepare() }
+        default:
+            UIImpactFeedbackGenerator(style: style).impactOccurred()
+        }
     }
 
     /// Taptic Engine を事前 warm-up する。App 起動時に呼ぶ。
     static func warmUp() {
-        UIImpactFeedbackGenerator(style: .light).prepare()
-        UIImpactFeedbackGenerator(style: .rigid).prepare()
+        lightGenerator.prepare()
+        rigidGenerator.prepare()
     }
 }

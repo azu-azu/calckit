@@ -111,7 +111,6 @@ struct SideMenu: View {
                     Spacer()
                 }
                 .frame(maxHeight: .infinity)
-                .allowsHitTesting(isPresented)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .edgesIgnoringSafeArea(.all)
