@@ -47,8 +47,10 @@ struct HomeCalculatorView: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .strokeBorder(Color.white.opacity(0.35), lineWidth: 1)
+                    .strokeBorder(Color.white.opacity(0.15), lineWidth: 1)
             )
+            .shadow(color: Color.black.opacity(0.6), radius: 30, x: 0, y: 16)
+            .shadow(color: Color.black.opacity(0.4), radius: 6, x: 0, y: 4)
             .padding(.top, 36)
             .padding(.horizontal, 4)
 
