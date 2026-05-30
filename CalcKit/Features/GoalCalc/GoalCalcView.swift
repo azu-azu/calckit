@@ -9,7 +9,7 @@ struct GoalCalcView: View {
     @FocusState private var isFocused: Bool
 
     // Period mode
-    @State private var periodCountText = "1"
+    @State private var periodCount: Int = 1
     @State private var selectedPeriod: Period = .year
 
     // Deadline mode
@@ -62,10 +62,6 @@ struct GoalCalcView: View {
         Double(targetText) ?? 0
     }
 
-    private var periodCount: Double {
-        Double(periodCountText) ?? 1
-    }
-
     private func daysFor(_ period: Period) -> Double {
         period.daysMultiplier(weekdaysOnly: weekdaysOnly)
     }
@@ -73,7 +69,7 @@ struct GoalCalcView: View {
     private var totalDays: Double {
         switch mode {
         case .period:
-            return periodCount * selectedPeriod.daysMultiplier(weekdaysOnly: weekdaysOnly)
+            return Double(periodCount) * selectedPeriod.daysMultiplier(weekdaysOnly: weekdaysOnly)
         case .deadline:
             return daysUntilDeadline
         }
@@ -122,7 +118,7 @@ struct GoalCalcView: View {
     }
 
     private var periodDateComponent: DateComponents {
-        let count = Int(periodCount)
+        let count = periodCount
         switch selectedPeriod {
         case .day: return DateComponents(day: count)
         case .week: return DateComponents(weekOfYear: count)
@@ -299,16 +295,29 @@ struct GoalCalcView: View {
     private var periodInputView: some View {
         VStack(spacing: 10) {
             HStack(spacing: 12) {
-                TextField("1", text: $periodCountText)
-                    .keyboardType(.numberPad)
-                    .focused($isFocused)
+                Button {
+                    if periodCount > 1 { periodCount -= 1 }
+                } label: {
+                    Image(systemName: "minus.circle.fill")
+                        .font(.system(size: 24, design: .rounded))
+                        .foregroundColor(DesignTokens.CommonTextColors.tertiary)
+                }
+                .buttonStyle(.plain)
+
+                Text("\(periodCount)")
                     .dynamicFont(size: 24, weight: .bold, design: .monospaced)
                     .foregroundColor(DesignTokens.CommonTextColors.primary)
+                    .frame(width: 40)
                     .multilineTextAlignment(.center)
-                    .frame(width: 50)
-                    .padding(.vertical, 8)
-                    .background(DesignTokens.InputColors.fieldBackground)
-                    .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+
+                Button {
+                    periodCount += 1
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 24, design: .rounded))
+                        .foregroundColor(AppTheme.accent)
+                }
+                .buttonStyle(.plain)
 
                 Picker("", selection: $selectedPeriod) {
                     ForEach(Period.allCases) { period in
