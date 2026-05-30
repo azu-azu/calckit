@@ -273,7 +273,7 @@ struct GoalCalcView: View {
                         if mode == .deadline {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "最終期限", value: dailyRate * totalDays)
-                        } else {
+                        } else if totalDays > daysFor(.year) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
                         }
