@@ -67,7 +67,7 @@ struct SideMenu: View {
                                     .padding(.top, DesignTokens.SideMenuLayout.itemSpacing)
 
                                 // Footer
-                                Text("v1.1.0")
+                                Text("v1.2.0")
                                     .dynamicFont(
                                         size: DesignTokens.SideMenuTypography.footerInfoSize,
                                         weight: DesignTokens.SideMenuTypography.footerInfoWeight
