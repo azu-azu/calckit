@@ -156,17 +156,7 @@ struct DayCountView: View {
                 .background(DesignTokens.InputColors.fieldBackground)
                 .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
 
-                Button {
-                    isDaysFocused = false
-                } label: {
-                    Image(systemName: "return")
-                        .dynamicFont(size: 18, weight: .semibold)
-                        .foregroundColor(AppTheme.accent)
-                        .frame(width: 44, height: 44)
-                        .background(AppTheme.accent.opacity(0.15))
-                        .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
-                }
-                .buttonStyle(.plain)
+                KeyboardReturnButton { isDaysFocused = false }
             }
         }
         .cardStyle()

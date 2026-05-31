@@ -24,17 +24,7 @@ struct SpecialPaymentRow<F: Hashable>: View {
                         .background(DesignTokens.InputColors.fieldBackground)
                         .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
 
-                    Button {
-                        isFocused.wrappedValue = nil
-                    } label: {
-                        Image(systemName: "return")
-                            .dynamicFont(size: 14, weight: .semibold)
-                            .foregroundColor(AppTheme.accent)
-                            .frame(width: 32, height: 32)
-                            .background(AppTheme.accent.opacity(0.15))
-                            .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
-                    }
-                    .buttonStyle(.plain)
+                    KeyboardReturnButton(size: .small) { isFocused.wrappedValue = nil }
                 }
             }
 

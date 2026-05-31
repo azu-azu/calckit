@@ -76,17 +76,7 @@ struct WarikanView: View {
                             .background(DesignTokens.InputColors.fieldBackground)
                             .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
 
-                            Button {
-                                focusedField = nil
-                            } label: {
-                                Image(systemName: "return")
-                                    .dynamicFont(size: 18, weight: .semibold)
-                                    .foregroundColor(AppTheme.accent)
-                                    .frame(width: 44, height: 44)
-                                    .background(AppTheme.accent.opacity(0.15))
-                                    .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
-                            }
-                            .buttonStyle(.plain)
+                            KeyboardReturnButton { focusedField = nil }
                         }
                     }
 
@@ -286,17 +276,7 @@ struct WarikanView: View {
                         .dynamicFont(size: 16, weight: .medium)
                         .foregroundColor(DesignTokens.CommonTextColors.tertiary)
 
-                    Button {
-                        focusedField = nil
-                    } label: {
-                        Image(systemName: "return")
-                            .dynamicFont(size: 16, weight: .semibold)
-                            .foregroundColor(AppTheme.accent)
-                            .frame(width: 36, height: 36)
-                            .background(AppTheme.accent.opacity(0.15))
-                            .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
-                    }
-                    .buttonStyle(.plain)
+                    KeyboardReturnButton(size: .compact) { focusedField = nil }
                 }
             }
         }

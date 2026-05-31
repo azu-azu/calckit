@@ -47,17 +47,7 @@ struct MathToolsView: View {
                             .background(DesignTokens.InputColors.fieldBackground)
                             .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
 
-                        Button {
-                            isFocused = false
-                        } label: {
-                            Image(systemName: "return")
-                                .dynamicFont(size: 18, weight: .semibold)
-                                .foregroundColor(AppTheme.accent)
-                                .frame(width: 44, height: 44)
-                                .background(AppTheme.accent.opacity(0.15))
-                                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
-                        }
-                        .buttonStyle(.plain)
+                        KeyboardReturnButton { isFocused = false }
                     }
 
                     if !sqrtResult.isEmpty {
