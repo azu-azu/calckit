@@ -72,10 +72,10 @@ struct GoalCalcView: View {
 
     private var totalPeriodLabel: String {
         switch selectedPeriod {
-        case .day:   return "\(periodCount)日間"
-        case .week:  return "\(periodCount)週間"
-        case .month: return "\(periodCount)ヶ月間"
-        case .year:  return "\(periodCount)年間"
+        case .day:   return "\(periodCount)日後"
+        case .week:  return "\(periodCount)週後"
+        case .month: return "\(periodCount)ヶ月後"
+        case .year:  return "\(periodCount)年後"
         }
     }
 
@@ -202,6 +202,18 @@ struct GoalCalcView: View {
                             .padding(DesignTokens.InputLayout.fieldPadding)
                             .background(DesignTokens.InputColors.fieldBackground)
                             .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
+
+                        Button {
+                            isFocused = false
+                        } label: {
+                            Image(systemName: "return")
+                                .dynamicFont(size: 18, weight: .semibold)
+                                .foregroundColor(AppTheme.accent)
+                                .frame(width: 44, height: 44)
+                                .background(AppTheme.accent.opacity(0.15))
+                                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+                        }
+                        .buttonStyle(.plain)
                     }
 
                     // People count
