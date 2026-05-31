@@ -66,6 +66,13 @@ struct GoalCalcView: View {
         period.daysMultiplier(weekdaysOnly: weekdaysOnly)
     }
 
+    // period モードは選択粒度まで必ず表示（>=）、deadline モードは超えた場合のみ（>）
+    private func shouldShowRow(for period: Period) -> Bool {
+        mode == .period
+            ? totalDays >= daysFor(period)
+            : totalDays > daysFor(period)
+    }
+
     private var totalDays: Double {
         switch mode {
         case .period:
@@ -254,22 +261,22 @@ struct GoalCalcView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
-                        if totalDays > 1 {
+                        if shouldShowRow(for: .day) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "1日", value: dailyRate)
                         }
-                        if totalDays > daysFor(.week) {
+                        if shouldShowRow(for: .week) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
                         }
-                        if totalDays > daysFor(.month) {
+                        if shouldShowRow(for: .month) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
                         }
                         if mode == .deadline {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "最終期限", value: dailyRate * totalDays)
-                        } else if totalDays > daysFor(.year) {
+                        } else if shouldShowRow(for: .year) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
                         }
