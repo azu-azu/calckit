@@ -20,6 +20,7 @@ struct GoalCalcView: View {
     enum Mode: String, CaseIterable, Identifiable {
         case period = "期間指定"
         case deadline = "期限指定"
+        case rate = "単位入力"
         var id: String { rawValue }
     }
 
@@ -85,6 +86,8 @@ struct GoalCalcView: View {
             return Double(periodCount) * selectedPeriod.daysMultiplier(weekdaysOnly: weekdaysOnly)
         case .deadline:
             return daysUntilDeadline
+        case .rate:
+            return selectedPeriod.daysMultiplier(weekdaysOnly: weekdaysOnly)
         }
     }
 
@@ -176,8 +179,10 @@ struct GoalCalcView: View {
                 VStack(spacing: DesignTokens.InputLayout.itemSpacing) {
                     if mode == .period {
                         periodInputView
-                    } else {
+                    } else if mode == .deadline {
                         deadlineInputView
+                    } else {
+                        rateInputView
                     }
 
                     // Target number + Plus/Minus
@@ -278,29 +283,41 @@ struct GoalCalcView: View {
                                 .foregroundColor(DesignTokens.CommonTextColors.secondary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
-                        if shouldShowRow(for: .day) {
+                        if mode == .rate {
+                            resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "1日", value: dailyRate)
-                        }
-                        if shouldShowRow(for: .week) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
-                        }
-                        if shouldShowRow(for: .month) {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
-                        }
-                        if mode == .deadline {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: "最終期限", value: dailyRate * totalDays)
+                            resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
                         } else {
-                            if shouldShowRow(for: .year) {
+                            resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
+                            if shouldShowRow(for: .day) {
                                 Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+                                resultRow(label: "1日", value: dailyRate)
                             }
-                            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: totalPeriodLabel, value: dailyRate * totalDays)
+                            if shouldShowRow(for: .week) {
+                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
+                            }
+                            if shouldShowRow(for: .month) {
+                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
+                            }
+                            if mode == .deadline {
+                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                resultRow(label: "最終期限", value: dailyRate * totalDays)
+                            } else {
+                                if shouldShowRow(for: .year) {
+                                    Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                    resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+                                }
+                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                resultRow(label: totalPeriodLabel, value: dailyRate * totalDays)
+                            }
                         }
                     }
                     .cardStyle()
@@ -417,6 +434,23 @@ struct GoalCalcView: View {
                         .tint(AppTheme.accent)
                 }
             }
+        }
+    }
+
+    // MARK: - Rate Input
+
+    private var rateInputView: some View {
+        HStack(spacing: 8) {
+            Picker("", selection: $selectedPeriod) {
+                ForEach(Period.allCases) { period in
+                    Text(period.rawValue).tag(period)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            Text("あたり")
+                .dynamicFont(size: 16, weight: .regular)
+                .foregroundColor(DesignTokens.CommonTextColors.tertiary)
         }
     }
 
