@@ -73,6 +73,15 @@ struct GoalCalcView: View {
             : totalDays > daysFor(period)
     }
 
+    private var totalPeriodLabel: String {
+        switch selectedPeriod {
+        case .day:   return "\(periodCount)日間"
+        case .week:  return "\(periodCount)週間"
+        case .month: return "\(periodCount)ヶ月間"
+        case .year:  return "\(periodCount)年間"
+        }
+    }
+
     private var totalDays: Double {
         switch mode {
         case .period:
@@ -276,9 +285,13 @@ struct GoalCalcView: View {
                         if mode == .deadline {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "最終期限", value: dailyRate * totalDays)
-                        } else if shouldShowRow(for: .year) {
+                        } else {
+                            if totalDays > daysFor(.year) {
+                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+                                resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+                            }
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+                            resultRow(label: totalPeriodLabel, value: dailyRate * totalDays)
                         }
                     }
                     .cardStyle()
