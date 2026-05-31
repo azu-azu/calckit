@@ -275,38 +275,9 @@ struct GoalCalcView: View {
                         }
                         resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
                         if mode == .rate {
-                            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: "1日", value: dailyRate)
-                            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
-                            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
-                            Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                            resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+                            rateResultRows
                         } else {
-                            if shouldShowRow(for: .day) {
-                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: "1日", value: dailyRate)
-                            }
-                            if shouldShowRow(for: .week) {
-                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
-                            }
-                            if shouldShowRow(for: .month) {
-                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
-                            }
-                            if mode == .deadline {
-                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: "最終期限", value: dailyRate * totalDays)
-                            } else {
-                                if shouldShowRow(for: .year) {
-                                    Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                    resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
-                                }
-                                Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
-                                resultRow(label: totalPeriodLabel, value: dailyRate * totalDays)
-                            }
+                            periodOrDeadlineResultRows
                         }
                     }
                     .cardStyle()
@@ -442,7 +413,50 @@ struct GoalCalcView: View {
         }
     }
 
-    // MARK: - Result Row
+    // MARK: - Result Rows
+
+    private var resultDivider: some View {
+        Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
+    }
+
+    @ViewBuilder
+    private var rateResultRows: some View {
+        resultDivider
+        resultRow(label: "1日", value: dailyRate)
+        resultDivider
+        resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
+        resultDivider
+        resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
+        resultDivider
+        resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+    }
+
+    @ViewBuilder
+    private var periodOrDeadlineResultRows: some View {
+        if shouldShowRow(for: .day) {
+            resultDivider
+            resultRow(label: "1日", value: dailyRate)
+        }
+        if shouldShowRow(for: .week) {
+            resultDivider
+            resultRow(label: weekdaysOnly ? "1週 (5日)" : "1週間", value: dailyRate * daysFor(.week))
+        }
+        if shouldShowRow(for: .month) {
+            resultDivider
+            resultRow(label: weekdaysOnly ? "1ヶ月 (約22日)" : "1ヶ月", value: dailyRate * daysFor(.month))
+        }
+        if mode == .deadline {
+            resultDivider
+            resultRow(label: "最終期限", value: dailyRate * totalDays)
+        } else {
+            if shouldShowRow(for: .year) {
+                resultDivider
+                resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
+            }
+            resultDivider
+            resultRow(label: totalPeriodLabel, value: dailyRate * totalDays)
+        }
+    }
 
     private func resultRow(label: String, value: Double) -> some View {
         HStack {
