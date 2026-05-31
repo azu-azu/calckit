@@ -66,11 +66,8 @@ struct GoalCalcView: View {
         period.daysMultiplier(weekdaysOnly: weekdaysOnly)
     }
 
-    // period モードは選択粒度まで必ず表示（>=）、deadline モードは超えた場合のみ（>）
     private func shouldShowRow(for period: Period) -> Bool {
-        mode == .period
-            ? totalDays >= daysFor(period)
-            : totalDays > daysFor(period)
+        totalDays > daysFor(period)
     }
 
     private var totalPeriodLabel: String {
@@ -286,7 +283,7 @@ struct GoalCalcView: View {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "最終期限", value: dailyRate * totalDays)
                         } else {
-                            if totalDays > daysFor(.year) {
+                            if shouldShowRow(for: .year) {
                                 Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                                 resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
                             }
