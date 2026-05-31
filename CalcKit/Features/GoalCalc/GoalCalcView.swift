@@ -283,8 +283,8 @@ struct GoalCalcView: View {
                                 .foregroundColor(DesignTokens.CommonTextColors.secondary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
+                        resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
                         if mode == .rate {
-                            resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: "1日", value: dailyRate)
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
@@ -294,7 +294,6 @@ struct GoalCalcView: View {
                             Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                             resultRow(label: weekdaysOnly ? "1年 (約261日)" : "1年", value: dailyRate * daysFor(.year))
                         } else {
-                            resultRow(label: weekdaysOnly ? "1時間 (8h/日)" : "1時間", value: dailyRate / (weekdaysOnly ? 8 : 24))
                             if shouldShowRow(for: .day) {
                                 Divider().background(DesignTokens.CommonBackgroundColors.cardBorderSubtle)
                                 resultRow(label: "1日", value: dailyRate)
