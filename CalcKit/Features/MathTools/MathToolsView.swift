@@ -46,6 +46,18 @@ struct MathToolsView: View {
                             .padding(12)
                             .background(DesignTokens.InputColors.fieldBackground)
                             .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+
+                        Button {
+                            isFocused = false
+                        } label: {
+                            Image(systemName: "return")
+                                .dynamicFont(size: 18, weight: .semibold)
+                                .foregroundColor(AppTheme.accent)
+                                .frame(width: 44, height: 44)
+                                .background(AppTheme.accent.opacity(0.15))
+                                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+                        }
+                        .buttonStyle(.plain)
                     }
 
                     if !sqrtResult.isEmpty {
@@ -70,7 +82,6 @@ struct MathToolsView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .keyboardCloseToolbar { isFocused = false }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 isFocused = true

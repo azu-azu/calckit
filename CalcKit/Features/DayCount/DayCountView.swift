@@ -89,7 +89,6 @@ struct DayCountView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .keyboardCloseToolbar { isDaysFocused = false }
         .onChange(of: mode) { _, newMode in
             guard newMode == .dateAfter else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
@@ -141,20 +140,34 @@ struct DayCountView: View {
             Text("日数")
                 .dynamicFont(size: 14, weight: .medium)
                 .foregroundColor(DesignTokens.CommonTextColors.secondary)
-            HStack {
-                TextField("0", text: $daysText)
-                    .keyboardType(.numberPad)
-                    .focused($isDaysFocused)
-                    .dynamicFont(size: 20, weight: .semibold)
-                    .foregroundColor(DesignTokens.CommonTextColors.primary)
-                Spacer()
-                Text("日後")
-                    .dynamicFont(size: 14, weight: .regular)
-                    .foregroundColor(DesignTokens.CommonTextColors.tertiary)
+            HStack(spacing: 8) {
+                HStack {
+                    TextField("0", text: $daysText)
+                        .keyboardType(.numberPad)
+                        .focused($isDaysFocused)
+                        .dynamicFont(size: 20, weight: .semibold)
+                        .foregroundColor(DesignTokens.CommonTextColors.primary)
+                    Spacer()
+                    Text("日後")
+                        .dynamicFont(size: 14, weight: .regular)
+                        .foregroundColor(DesignTokens.CommonTextColors.tertiary)
+                }
+                .padding(DesignTokens.InputLayout.fieldPadding)
+                .background(DesignTokens.InputColors.fieldBackground)
+                .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
+
+                Button {
+                    isDaysFocused = false
+                } label: {
+                    Image(systemName: "return")
+                        .dynamicFont(size: 18, weight: .semibold)
+                        .foregroundColor(AppTheme.accent)
+                        .frame(width: 44, height: 44)
+                        .background(AppTheme.accent.opacity(0.15))
+                        .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+                }
+                .buttonStyle(.plain)
             }
-            .padding(DesignTokens.InputLayout.fieldPadding)
-            .background(DesignTokens.InputColors.fieldBackground)
-            .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
         }
         .cardStyle()
     }

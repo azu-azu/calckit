@@ -54,26 +54,40 @@ struct WarikanView: View {
                         Text("合計額")
                             .dynamicFont(size: 14, weight: .medium)
                             .foregroundColor(DesignTokens.CommonTextColors.secondary)
-                        HStack {
-                            TextField("0", text: $totalAmountText)
-                                .keyboardType(.numberPad)
-                                .focused($focusedField, equals: .totalAmount)
-                                .dynamicFont(size: 20, weight: .semibold)
-                                .foregroundColor(DesignTokens.CommonTextColors.primary)
+                        HStack(spacing: 8) {
+                            HStack {
+                                TextField("0", text: $totalAmountText)
+                                    .keyboardType(.numberPad)
+                                    .focused($focusedField, equals: .totalAmount)
+                                    .dynamicFont(size: 20, weight: .semibold)
+                                    .foregroundColor(DesignTokens.CommonTextColors.primary)
 
-                            if !totalAmountText.isEmpty {
-                                Button {
-                                    totalAmountText = ""
-                                    focusedField = .totalAmount
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .foregroundColor(DesignTokens.CommonTextColors.quaternary)
+                                if !totalAmountText.isEmpty {
+                                    Button {
+                                        totalAmountText = ""
+                                        focusedField = .totalAmount
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(DesignTokens.CommonTextColors.quaternary)
+                                    }
                                 }
                             }
+                            .padding(DesignTokens.InputLayout.fieldPadding)
+                            .background(DesignTokens.InputColors.fieldBackground)
+                            .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
+
+                            Button {
+                                focusedField = nil
+                            } label: {
+                                Image(systemName: "return")
+                                    .dynamicFont(size: 18, weight: .semibold)
+                                    .foregroundColor(AppTheme.accent)
+                                    .frame(width: 44, height: 44)
+                                    .background(AppTheme.accent.opacity(0.15))
+                                    .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .padding(DesignTokens.InputLayout.fieldPadding)
-                        .background(DesignTokens.InputColors.fieldBackground)
-                        .cornerRadius(DesignTokens.InputLayout.fieldCornerRadius)
                     }
 
                     // People count
@@ -154,7 +168,6 @@ struct WarikanView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .keyboardCloseToolbar { focusedField = nil }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 focusedField = .totalAmount
@@ -272,6 +285,18 @@ struct WarikanView: View {
                     Text("× \(result.remainingPeople)人")
                         .dynamicFont(size: 16, weight: .medium)
                         .foregroundColor(DesignTokens.CommonTextColors.tertiary)
+
+                    Button {
+                        focusedField = nil
+                    } label: {
+                        Image(systemName: "return")
+                            .dynamicFont(size: 16, weight: .semibold)
+                            .foregroundColor(AppTheme.accent)
+                            .frame(width: 36, height: 36)
+                            .background(AppTheme.accent.opacity(0.15))
+                            .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }

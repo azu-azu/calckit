@@ -13,15 +13,29 @@ struct SpecialPaymentRow<F: Hashable>: View {
                 Text("金額")
                     .dynamicFont(size: 12, weight: .regular)
                     .foregroundColor(DesignTokens.CommonTextColors.quaternary)
-                TextField("0", text: $payment.amountText)
-                    .keyboardType(.numberPad)
-                    .focused(isFocused, equals: focusValue)
-                    .dynamicFont(size: 16, weight: .medium)
-                    .foregroundColor(DesignTokens.CommonTextColors.primary)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .background(DesignTokens.InputColors.fieldBackground)
-                    .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+                HStack(spacing: 6) {
+                    TextField("0", text: $payment.amountText)
+                        .keyboardType(.numberPad)
+                        .focused(isFocused, equals: focusValue)
+                        .dynamicFont(size: 16, weight: .medium)
+                        .foregroundColor(DesignTokens.CommonTextColors.primary)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(DesignTokens.InputColors.fieldBackground)
+                        .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+
+                    Button {
+                        isFocused.wrappedValue = nil
+                    } label: {
+                        Image(systemName: "return")
+                            .dynamicFont(size: 14, weight: .semibold)
+                            .foregroundColor(AppTheme.accent)
+                            .frame(width: 32, height: 32)
+                            .background(AppTheme.accent.opacity(0.15))
+                            .cornerRadius(DesignTokens.InputLayout.compactFieldCornerRadius)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
 
             // Count

@@ -327,7 +327,6 @@ struct GoalCalcView: View {
             .padding(.horizontal, DesignTokens.InputLayout.screenHorizontal)
             .padding(.top, 16)
         }
-        .keyboardCloseToolbar { isFocused = false }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + DesignTokens.Timing.keyboardFocusDelay) {
                 isFocused = true
