@@ -35,10 +35,11 @@
 		ACDA4C1255CFE008C7074FA6 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDF62F3A6213B7D106E8E3 /* DesignTokens.swift */; };
 		B4F3CA812D23F30D69F2FA0A /* GoalCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28FEDFE2A681A05BE9037F3 /* GoalCalcView.swift */; };
 		B963081D234B0DF63720CE18 /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451032C0262222352342544D /* CalcButton.swift */; };
+		BADCB3C3CA61D20E22C8D2E7 /* KeyboardReturnButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782A0A838820DCFCB7BF61B7 /* KeyboardReturnButton.swift */; };
+		BF360EB9C1A1A9FF26A75488 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B92C30FA6553A54CA8D432D /* Localizable.strings */; };
 		C99B9F65AB5307F3036D9094 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B9FA6D6C065FE3D429192 /* StatusBarView.swift */; };
 		EABBD4E6490D715C0BFB1024 /* DynamicFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71F40C9C21D6B93CC84061 /* DynamicFontModifier.swift */; };
 		EFF97978E763FAC0BD804C96 /* SideMenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BFB9E478E9E56A3C9D45EE /* SideMenuOverlay.swift */; };
-		F528FD30496793AC72C48E41 /* KeyboardCloseToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB70800F4399EC5E4B6463E /* KeyboardCloseToolbar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +58,9 @@
 		5705214CFD363EFA739AF7F3 /* CircleIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleIconButton.swift; sourceTree = "<group>"; };
 		6180818847060A751B698206 /* CardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStyles.swift; sourceTree = "<group>"; };
 		618B9FA6D6C065FE3D429192 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		782A0A838820DCFCB7BF61B7 /* KeyboardReturnButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReturnButton.swift; sourceTree = "<group>"; };
 		7BF151AD459D7E57C3B0E84D /* HomeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalculatorView.swift; sourceTree = "<group>"; };
+		8B92C30FA6553A54CA8D432D /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9467FFEC9144924C1AAAA955 /* SpecialPaymentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialPaymentRow.swift; sourceTree = "<group>"; };
 		9E7BB2219AFC64018D72F2B6 /* WarikanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarikanView.swift; sourceTree = "<group>"; };
 		B28FEDFE2A681A05BE9037F3 /* GoalCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCalcView.swift; sourceTree = "<group>"; };
@@ -69,7 +72,6 @@
 		D21A99C630D7093458A98C22 /* DayCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCountView.swift; sourceTree = "<group>"; };
 		D6D876117E5C2768142DF567 /* CalcKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcKeypad.swift; sourceTree = "<group>"; };
 		D7E6D0B28BB812B234ECE796 /* CalcDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcDisplay.swift; sourceTree = "<group>"; };
-		DBB70800F4399EC5E4B6463E /* KeyboardCloseToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCloseToolbar.swift; sourceTree = "<group>"; };
 		DE32968117788F35F7523210 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		F5F83953FE4F6C7006E3A54B /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		F823957052BA4B39322DA25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				F823957052BA4B39322DA25B /* Assets.xcassets */,
+				8B92C30FA6553A54CA8D432D /* Localizable.strings */,
 				60F648FE44E67BFC3E551DEE /* App */,
 				F83812DC53496DB60952C803 /* Core */,
 				9FC8B831496E2C08D8633772 /* DesignSystem */,
@@ -202,7 +205,7 @@
 				451032C0262222352342544D /* CalcButton.swift */,
 				6180818847060A751B698206 /* CardStyles.swift */,
 				5705214CFD363EFA739AF7F3 /* CircleIconButton.swift */,
-				DBB70800F4399EC5E4B6463E /* KeyboardCloseToolbar.swift */,
+				782A0A838820DCFCB7BF61B7 /* KeyboardReturnButton.swift */,
 				618B9FA6D6C065FE3D429192 /* StatusBarView.swift */,
 			);
 			path = Components;
@@ -311,6 +314,7 @@
 			knownRegions = (
 				Base,
 				en,
+				ja,
 			);
 			mainGroup = 7761ABE91A649276E3A35B34;
 			minimizedProjectReferenceProxies = 1;
@@ -330,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				415CA960929B3D918A22767F /* Assets.xcassets in Resources */,
+				BF360EB9C1A1A9FF26A75488 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +365,7 @@
 				711E1708F1E92233F4F782E0 /* HistoryStore.swift in Sources */,
 				86425EE36D1E4844DFA0B83F /* HistoryView.swift in Sources */,
 				5E9AB90F5B6F515A8C78F768 /* HomeCalculatorView.swift in Sources */,
-				F528FD30496793AC72C48E41 /* KeyboardCloseToolbar.swift in Sources */,
+				BADCB3C3CA61D20E22C8D2E7 /* KeyboardReturnButton.swift in Sources */,
 				216CA9EA51DCC501ED862125 /* MathToolsView.swift in Sources */,
 				1F8029082847C7F070FCBD7E /* SaveDialog.swift in Sources */,
 				550F2AFBFD7D4ADB6349ECF1 /* SideMenu.swift in Sources */,
@@ -389,7 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsukiusagi.calckit;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -432,6 +437,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_REGION = ja;
 				DEVELOPMENT_TEAM = ZD854UM35V;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -496,6 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_REGION = ja;
 				DEVELOPMENT_TEAM = ZD854UM35V;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -543,7 +550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsukiusagi.calckit;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
