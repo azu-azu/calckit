@@ -319,6 +319,10 @@ struct GoalCalcView: View {
                 }
                 .buttonStyle(.plain)
 
+                Spacer()
+            }
+
+            HStack(spacing: 8) {
                 Picker("", selection: $selectedPeriod) {
                     ForEach(Period.allCases) { period in
                         Text(period.rawValue).tag(period)
