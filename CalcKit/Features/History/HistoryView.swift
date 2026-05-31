@@ -6,7 +6,7 @@ struct HistoryView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Title
-            Text("History")
+            Text("履歴")
                 .dynamicFont(
                     size: DesignTokens.FeatureTypography.sectionTitleSize,
                     weight: DesignTokens.FeatureTypography.sectionTitleWeight

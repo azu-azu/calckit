@@ -8,6 +8,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
+    DEVELOPMENT_REGION: ja
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ZD854UM35V
     GENERATE_INFOPLIST_FILE: YES

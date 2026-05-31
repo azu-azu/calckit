@@ -17,7 +17,7 @@ enum Page: String, CaseIterable, Identifiable {
         case .dayCount: "日数計算"
         case .goalCalc: "目標計算"
         case .math: "数学"
-        case .history: "History"
+        case .history: "履歴"
         }
     }
 

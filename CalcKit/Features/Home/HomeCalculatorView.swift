@@ -103,7 +103,7 @@ struct HomeCalculatorView: View {
                 HStack(spacing: 6) {
                     Image(systemName: "square.and.arrow.down")
                         .font(.system(size: 14, design: .rounded))
-                    Text("Save")
+                    Text("保存")
                         .dynamicFont(size: 14, weight: .medium)
                 }
                 .foregroundColor(AppTheme.accent)
