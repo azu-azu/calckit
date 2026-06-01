@@ -36,6 +36,7 @@ enum Page: String, CaseIterable, Identifiable {
 struct ContentView: View {
     @State private var selectedPage: Page = .home
     @State private var isMenuPresented = false
+    @State private var previousPage: Page? = nil
 
     private func openMenu() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -70,11 +71,7 @@ struct ContentView: View {
                             openMenu()
                         }
                         Spacer()
-                        if selectedPage != .home {
-                            CircleIconButton(systemName: "house.fill") {
-                                selectedPage = .home
-                            }
-                        }
+                        navigationTrailingButton
                     }
                     .padding(.horizontal, 8)
                     .padding(.bottom, 8)
@@ -91,6 +88,26 @@ struct ContentView: View {
         .gesture(sideMenuDragGesture())
         .statusBarHidden(true)
         .preferredColorScheme(.dark)
+        .onChange(of: selectedPage) { _, new in
+            if new != .home {
+                previousPage = new
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var navigationTrailingButton: some View {
+        if selectedPage == .home {
+            if let prev = previousPage {
+                CircleIconButton(systemName: prev.icon) {
+                    selectedPage = prev
+                }
+            }
+        } else {
+            CircleIconButton(systemName: "house.fill") {
+                selectedPage = .home
+            }
+        }
     }
 
     // MARK: - Swipe Gesture
