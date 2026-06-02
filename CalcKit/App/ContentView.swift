@@ -70,6 +70,7 @@ struct ContentView: View {
                         SideMenuTriggerButton {
                             openMenu()
                         }
+                        navigationLeadingExtra
                         Spacer()
                         navigationTrailingButton
                     }
@@ -95,15 +96,19 @@ struct ContentView: View {
         }
     }
 
+    // ホーム画面のときだけ左側に戻るボタンを表示（右側の保存ボタンと被らないよう）
+    @ViewBuilder
+    private var navigationLeadingExtra: some View {
+        if selectedPage == .home, let prev = previousPage {
+            CircleIconButton(systemName: prev.icon) {
+                selectedPage = prev
+            }
+        }
+    }
+
     @ViewBuilder
     private var navigationTrailingButton: some View {
-        if selectedPage == .home {
-            if let prev = previousPage {
-                CircleIconButton(systemName: prev.icon) {
-                    selectedPage = prev
-                }
-            }
-        } else {
+        if selectedPage != .home {
             CircleIconButton(systemName: "house.fill") {
                 selectedPage = .home
             }
