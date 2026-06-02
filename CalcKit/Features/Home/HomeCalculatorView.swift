@@ -96,8 +96,26 @@ struct HomeCalculatorView: View {
     }
 
     private var calcToolbar: some View {
-        HStack {
+        HStack(spacing: 8) {
             Spacer()
+
+            Button {
+                HapticFeedback.impact(.light)
+                UIPasteboard.general.string = engine.displayValue
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "doc.on.doc")
+                        .font(.system(size: 14, design: .rounded))
+                    Text("コピー")
+                        .dynamicFont(size: 14, weight: .medium)
+                }
+                .foregroundColor(DesignTokens.CommonTextColors.secondary)
+                .padding(.horizontal, 16)
+                .frame(height: DesignTokens.CalcLayout.toolbarHeight)
+                .background(DesignTokens.CommonBackgroundColors.cardSubtle)
+                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+            }
+            .buttonStyle(.plain)
 
             Button(action: { showSaveDialog = true }) {
                 HStack(spacing: 6) {
