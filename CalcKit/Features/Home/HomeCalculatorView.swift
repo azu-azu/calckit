@@ -5,6 +5,7 @@ struct HomeCalculatorView: View {
     @State private var engine = CalcEngine()
     @State private var showSaveDialog = false
     @State private var showCopied = false
+    @State private var copyToken = UUID()
 
     var body: some View {
         GeometryReader { geo in
@@ -104,8 +105,10 @@ struct HomeCalculatorView: View {
                 HapticFeedback.impact(.light)
                 UIPasteboard.general.string = engine.displayValue
                 showCopied = true
+                let token = UUID()
+                copyToken = token
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    showCopied = false
+                    if copyToken == token { showCopied = false }
                 }
             } label: {
                 HStack(spacing: 6) {
