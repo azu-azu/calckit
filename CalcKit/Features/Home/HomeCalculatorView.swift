@@ -4,6 +4,7 @@ struct HomeCalculatorView: View {
     @Environment(HistoryStore.self) private var historyStore
     @State private var engine = CalcEngine()
     @State private var showSaveDialog = false
+    @State private var showCopied = false
 
     var body: some View {
         GeometryReader { geo in
@@ -102,18 +103,23 @@ struct HomeCalculatorView: View {
             Button {
                 HapticFeedback.impact(.light)
                 UIPasteboard.general.string = engine.displayValue
+                showCopied = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showCopied = false
+                }
             } label: {
                 HStack(spacing: 6) {
-                    Image(systemName: "doc.on.doc")
+                    Image(systemName: showCopied ? "checkmark" : "doc.on.doc")
                         .font(.system(size: 14, design: .rounded))
-                    Text("コピー")
+                    Text(showCopied ? "Copied!" : "コピー")
                         .dynamicFont(size: 14, weight: .medium)
                 }
-                .foregroundColor(DesignTokens.CommonTextColors.secondary)
+                .foregroundColor(showCopied ? DesignTokens.StatusColors.success : DesignTokens.CommonTextColors.secondary)
                 .padding(.horizontal, 16)
                 .frame(height: DesignTokens.CalcLayout.toolbarHeight)
                 .background(DesignTokens.CommonBackgroundColors.cardSubtle)
                 .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
+                .animation(.easeInOut(duration: 0.15), value: showCopied)
             }
             .buttonStyle(.plain)
 
