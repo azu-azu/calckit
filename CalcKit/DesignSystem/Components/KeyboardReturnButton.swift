@@ -34,7 +34,8 @@ struct KeyboardReturnButton: View {
             Image(systemName: "return")
                 .dynamicFont(size: fontSize, weight: .semibold)
                 .foregroundColor(AppTheme.accent)
-                .frame(width: dimension, height: dimension)
+                .frame(width: dimension)
+                .frame(maxHeight: .infinity)
                 .background(AppTheme.accent.opacity(0.15))
                 .cornerRadius(cornerRadius)
         }
