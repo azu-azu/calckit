@@ -126,7 +126,6 @@ struct HomeCalculatorView: View {
                 .animation(.easeInOut(duration: 0.15), value: showCopied)
             }
             .buttonStyle(.plain)
-
         }
     }
 }
