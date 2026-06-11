@@ -3,7 +3,6 @@ import SwiftUI
 struct HomeCalculatorView: View {
     @Environment(HistoryStore.self) private var historyStore
     @State private var engine = CalcEngine()
-    @State private var showSaveDialog = false
     @State private var showCopied = false
     @State private var copyToken = UUID()
 
@@ -17,14 +16,16 @@ struct HomeCalculatorView: View {
                 portraitLayout
             }
         }
-        .saveDialog(isPresented: $showSaveDialog) { name in
-            let item = HistoryItem(
-                name: name,
-                expression: engine.fullExpression,
-                result: engine.result
-            )
-            historyStore.save(item: item)
-        }
+    }
+
+    private func autoSave() {
+        let expr = engine.expression
+        guard !expr.isEmpty, expr != engine.result else { return }
+        historyStore.save(item: HistoryItem(
+            name: "",
+            expression: expr,
+            result: engine.result
+        ))
     }
 
     private var portraitLayout: some View {
@@ -86,7 +87,7 @@ struct HomeCalculatorView: View {
         CalcKeypad(
             onDigit: { engine.inputDigit($0) },
             onOperator: { engine.inputOperator($0) },
-            onEquals: { engine.evaluate() },
+            onEquals: { engine.evaluate(); autoSave() },
             onClear: { engine.clear() },
             onBackspace: { engine.backspace() },
             onDecimal: { engine.inputDecimal() },
@@ -126,20 +127,6 @@ struct HomeCalculatorView: View {
             }
             .buttonStyle(.plain)
 
-            Button(action: { showSaveDialog = true }) {
-                HStack(spacing: 6) {
-                    Image(systemName: "square.and.arrow.down")
-                        .font(.system(size: 14, design: .rounded))
-                    Text("保存")
-                        .dynamicFont(size: 14, weight: .medium)
-                }
-                .foregroundColor(AppTheme.accent)
-                .padding(.horizontal, 16)
-                .frame(height: DesignTokens.CalcLayout.toolbarHeight)
-                .background(AppTheme.accent.opacity(0.12))
-                .cornerRadius(DesignTokens.InputLayout.cardCornerRadius)
-            }
-            .buttonStyle(.plain)
         }
     }
 }

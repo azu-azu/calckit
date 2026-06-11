@@ -23,7 +23,7 @@ struct HistoryView: View {
                     Image(systemName: "clock.arrow.circlepath")
                         .font(.system(size: 48, design: .rounded))
                         .foregroundColor(DesignTokens.CommonTextColors.quinary)
-                    Text("保存された計算はありません")
+                    Text("計算履歴はありません")
                         .dynamicFont(size: 16, weight: .regular)
                         .foregroundColor(DesignTokens.CommonTextColors.quaternary)
                 }
@@ -45,9 +45,11 @@ struct HistoryView: View {
     private func historyCard(_ item: HistoryItem) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(item.name)
-                    .dynamicFont(size: 16, weight: .semibold)
-                    .foregroundColor(DesignTokens.CommonTextColors.primary)
+                if !item.name.isEmpty {
+                    Text(item.name)
+                        .dynamicFont(size: 16, weight: .semibold)
+                        .foregroundColor(DesignTokens.CommonTextColors.primary)
+                }
 
                 Spacer()
 

@@ -10,7 +10,6 @@
 		034B160116C302498DA6DE57 /* CalcEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155EF8B2D09EE49F46E516D /* CalcEngine.swift */; };
 		10A7E0BDF9AC42DD39BA5D5B /* SpecialPaymentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467FFEC9144924C1AAAA955 /* SpecialPaymentRow.swift */; };
 		10EE4663938B2FD50F820126 /* CalcKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D876117E5C2768142DF567 /* CalcKeypad.swift */; };
-		1F8029082847C7F070FCBD7E /* SaveDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3543D0F27DFD666EC2DE2E34 /* SaveDialog.swift */; };
 		216CA9EA51DCC501ED862125 /* MathToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5E96FAF496E4D899054BF /* MathToolsView.swift */; };
 		373FA09FA489762534C1DB01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ECFFFAA1C5192295CB6098 /* ContentView.swift */; };
 		415CA960929B3D918A22767F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F823957052BA4B39322DA25B /* Assets.xcassets */; };
@@ -48,7 +47,6 @@
 		191EC456D0CDD5E6A69FD1A3 /* CalcKit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CalcKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FF72E717BF6D57130A3350 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		3155EF8B2D09EE49F46E516D /* CalcEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcEngine.swift; sourceTree = "<group>"; };
-		3543D0F27DFD666EC2DE2E34 /* SaveDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDialog.swift; sourceTree = "<group>"; };
 		4000D81A6CCD625D60BB902B /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		40BFB9E478E9E56A3C9D45EE /* SideMenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOverlay.swift; sourceTree = "<group>"; };
 		42EE7071ACEEA8885394004A /* WarikanEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarikanEngine.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				3155EF8B2D09EE49F46E516D /* CalcEngine.swift */,
 				D6D876117E5C2768142DF567 /* CalcKeypad.swift */,
 				7BF151AD459D7E57C3B0E84D /* HomeCalculatorView.swift */,
-				3543D0F27DFD666EC2DE2E34 /* SaveDialog.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -367,7 +364,6 @@
 				5E9AB90F5B6F515A8C78F768 /* HomeCalculatorView.swift in Sources */,
 				BADCB3C3CA61D20E22C8D2E7 /* KeyboardReturnButton.swift in Sources */,
 				216CA9EA51DCC501ED862125 /* MathToolsView.swift in Sources */,
-				1F8029082847C7F070FCBD7E /* SaveDialog.swift in Sources */,
 				550F2AFBFD7D4ADB6349ECF1 /* SideMenu.swift in Sources */,
 				EFF97978E763FAC0BD804C96 /* SideMenuOverlay.swift in Sources */,
 				A9A2BF3F90940656E0651111 /* SideMenuTriggerButton.swift in Sources */,
